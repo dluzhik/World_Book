@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block title %}<title>Мир книг</title>{% endblock %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,
+                        initial-scale=1">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/
+        bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/
+               jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/
+               js/bootstrap.min.js"></script>
+
+  <!-- Добавление статического CSS файла -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% block head %}
+      <img src="{% static 'images/logotip.png' %}"
+      style="width:100px; height:100px;"  align="absmiddle">
+      <a style="color:blue; font-family: sans-serif; font-size: 300%">Сайт "Мир книг"</a>
+  {% endblock %}
+</head>
+
+<body>
+  <div style="font-family: sans-serif;">
+    <div>
+      <div>
+      {% block sidebar %}
+      <ul class="sidebar-nav">
+          <li><a href="{% url 'index' %}">Главная страница</a></li>
+          <li><a href="{% url 'books' %}">Все книги</a></li>
+          <li><a href="">Все авторы</a></li>
+      </ul>
+      {% endblock %}
+      </div>
+      <div class="container">
+      {% block content %}{% endblock %}
+      {% block footer %}
+         {% block copyright %}
+       <p>Copyright ООО "Люди и книги", 2020. Все права защищены</p>
+         {% endblock %}
+      {% endblock %}
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>
