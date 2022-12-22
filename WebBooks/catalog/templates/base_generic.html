@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   {% block title %}<title>Мир книг</title>{% endblock %}
+  <link type="image/png" sizes="96x96" rel="icon" href="images/logotip.png">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,
                         initial-scale=1">
@@ -31,15 +32,35 @@
       <ul class="sidebar-nav">
           <li><a href="{% url 'index' %}">Главная страница</a></li>
           <li><a href="{% url 'books' %}">Все книги</a></li>
-          <li><a href="">Все авторы</a></li>
+          <li><a href="{% url 'authors' %}">Все авторы</a></li>
       </ul>
       {% endblock %}
       </div>
       <div class="container">
       {% block content %}{% endblock %}
+
+      {% block pagination %}
+          {% if is_paginated %}
+            <div class="pagination">
+                <span class="page-links">
+                    {% if page_obj.has_previous %}
+                        <a href="{{ request.path}}?page={{page_obj.previous_page_number}}">Пердыдущая</a>
+                    {% endif %}
+                    <span class="page-current">
+                        Страница {{page_obj.number}} из {{ page_obj.paginator.num_pages }}.
+                    </span>
+                    {% if page_obj.has_next %}
+                        <a href="{{request.path}}?page={{page_obj.next_page_number}}">Следующая</a>
+                    {% endif %}
+                </span>
+            </div>
+          {% endif %}
+      {% endblock %}
+
+
       {% block footer %}
          {% block copyright %}
-       <p>Copyright ООО "Люди и книги", 2020. Все права защищены</p>
+       <p>Учебный проект Длужанского Н. Е. разработанный на языке Python с использованием фраймворка Django</p>
          {% endblock %}
       {% endblock %}
 
